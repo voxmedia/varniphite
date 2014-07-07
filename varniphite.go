@@ -10,22 +10,37 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
+	"time"
 )
 
 var (
 	graphiteHost string
 	graphitePort int
 	metricPath   string
+	interval     int
 )
 
 func init() {
 	flag.StringVar(&graphiteHost, "H", "localhost", "Hostname for graphite")
 	flag.IntVar(&graphitePort, "p", 2003, "Port for graphite")
 	flag.StringVar(&metricPath, "m", "varnish.stats", "Metric path")
+	flag.IntVar(&interval, "i", 10, "Check stats each <i> seconds")
 }
 
 func main() {
 
+	tenSecs := time.Duration(interval) * time.Second
+
+	for {
+		fmt.Printf("Running...")
+		work()
+		fmt.Printf("Done!\n")
+		time.Sleep(tenSecs)
+	}
+
+}
+
+func work() {
 	if len(os.Args) < 4 {
 		flag.Usage()
 	}
@@ -83,7 +98,5 @@ func main() {
 		metric := fmt.Sprintf("%s.%s", metricPath, z)
 		value := fmt.Sprintf("%f", w)
 		conn.SimpleSend(metric, value)
-		log.Printf("Sending %s %s", metric, value)
 	}
-
 }
