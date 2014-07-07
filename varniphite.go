@@ -31,6 +31,11 @@ func main() {
 
 	tenSecs := time.Duration(interval) * time.Second
 
+	if len(os.Args) < 4 {
+		flag.Usage()
+	}
+	flag.Parse()
+
 	for {
 		fmt.Printf("Running...")
 		work()
@@ -41,11 +46,6 @@ func main() {
 }
 
 func work() {
-	if len(os.Args) < 4 {
-		flag.Usage()
-	}
-	flag.Parse()
-
 	// Read results from varnishstat
 	out, err := exec.Command("varnishstat", "-j").Output()
 	if err != nil {
