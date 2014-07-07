@@ -33,6 +33,7 @@ func main() {
 
 	if len(os.Args) < 4 {
 		flag.Usage()
+		os.Exit(127)
 	}
 	flag.Parse()
 
