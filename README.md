@@ -22,3 +22,13 @@ Parameter|Default|Function
 `-H`|`localhost`    |Graphite server host
 `-m`|`varnish.stats`|Path to be appended to metrics
 `-p`|`2003`         |Graphite server port
+
+Example `runit` script
+======================
+
+```bash
+#!/bin/sh
+HOSTNAME=$(hostname)
+exec 2>&1
+exec /opt/go/bin/varniphite -H stats.example.com -p 2003 -m "varnish_stats.$HOSTNAME" -i 10
+```
