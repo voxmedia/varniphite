@@ -47,3 +47,5 @@ HOSTNAME=$(hostname)
 exec 2>&1
 exec /opt/go/bin/varniphite -H stats.example.com -p 2003 -m "varnish_stats.$HOSTNAME" -i 10
 ```
+
+Copyright 2014 Vox Media, Inc. See LICENSE for details.
