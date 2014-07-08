@@ -13,6 +13,21 @@ How
 
 This app doesn't daemonize itself, so I suggest using it under `runit` or similar. All output goes to `STDOUT`
 
+Installation
+=============
+
+```
+$ go get github.com/voxmedia/varniphite
+```
+
+In case of the server not having `go` installed, you can compile/cross-compile (if you are on MacOS X) for linux:
+
+```
+$ GOOS=linux go build github.com/voxmedia/varniphite
+```
+
+And copy the generated static binary to your servers.
+
 Parameters
 ==========
 
