@@ -68,6 +68,8 @@ func work() {
 		case string:
 			if strings.Contains(i, "timestamp") {
 				continue
+			} else if strings.Contains(i, "VBE.vcl") {
+				continue
 			}
 		case map[string]interface{}:
 			for sk, s := range i {
